@@ -1,0 +1,10 @@
+double Kp = 0.1, Ki = 0.01, Kd = 0.05;    // PID
+double setpoint = 0.9 * T_in;            // 출구온도 목표 = 유입온도의 90%
+double error = setpoint - T_out;         
+integral += error * dt;                 
+double derivative = (error - prevError) / dt;  
+double control = Kp*error + Ki*integral + Kd*derivative;  
+prevError = error;                      
+
+// 조작변 적용 (예: MDOT 조절)
+MDOT = MDOT + control;   
